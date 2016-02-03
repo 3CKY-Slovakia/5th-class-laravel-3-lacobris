@@ -70,3 +70,20 @@ Route::group(['prefix' => 'article'], function () {
     Route::post('store', 'ArticlesController@store');
     Route::post('update/{id}', 'ArticlesController@update');
 });
+
+/**
+ * CONTACT
+ */
+Route::get('contact', 'ContactController@showForm');
+Route::post('contact', 'ContactController@sendContactInfo');
+
+/**
+ * PROFILE
+ */
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/', 'UsersController@index');
+    Route::get('show/{id}', 'UsersController@show');
+    Route::get('edit/{id}', 'UsersController@edit');
+
+    Route::post('update/{id}', 'UsersController@update');
+});

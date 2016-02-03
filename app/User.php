@@ -43,12 +43,24 @@ class User extends Model implements AuthenticatableContract,
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function articles()
-    {
+    public function articles(){
+
         return $this->hasMany('App\Article');
     }
 
     public function isOwner($articleID){
         return !empty(Auth::user()->articles()->find($articleID));
+    }
+
+    public function numberOfArticles(){
+        /*$number = 0;
+        $articles = Article::all();
+        foreach($articles as $article){
+            if(Auth::user()->articles()->find($article))
+                $number++;
+        }
+        return $number;*/
+
+        return count(Auth::user()->articles()->get());
     }
 }

@@ -29,7 +29,7 @@
                     </li>
 
                     <li>
-                        <a href="#">Bloggers</a>
+                        <a href="{{ url('user') }}">Bloggers</a>
                     </li>
 
                     <li>
@@ -58,11 +58,15 @@
                                 </li>
                             @else
                                 <li>
-                                    <a href="{{ url('user/profile') }}"><i class="fa fa-gears"></i> Profile</a>
+                                    <a href="{{ url('user/profile/'.Auth::user()->id) }}"><i class="fa fa-gears"></i> Profile</a>
                                     <a href="{{ url('auth/logout') }}"><i class="fa fa-sign-out"></i> Log Out</a>
                                 </li>
                             @endif
                         </ul>
+                    </li>
+
+                    <li>
+                        <a href="/contact   ">Contact Us</a>
                     </li>
 
                     <li class="dropdown-toggle nav-toggle"><a href="#" class="tahoma"><i class="fa fa-search"></i></a>
@@ -79,6 +83,7 @@
                             </li>
                         </ul>
                     </li>
+
                 </ul>
                 <!-- End Nav List -->
             </div>

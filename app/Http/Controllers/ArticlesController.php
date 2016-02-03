@@ -18,7 +18,7 @@ class ArticlesController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
-        $this->middleware('articleOwner:', ['except' => ['index', 'show', 'create']]);
+        $this->middleware('articleOwner:', ['except' => ['index', 'show', 'create', 'store']]);
     }
 
     /**
@@ -54,7 +54,6 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
         $article = new Article();
         $article->title = $data['title'];
         $article->video = $data['video'];
