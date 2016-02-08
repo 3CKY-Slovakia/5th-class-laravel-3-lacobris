@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\User;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class ArticlesController extends Controller
 {
@@ -18,7 +20,8 @@ class ArticlesController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
-        $this->middleware('articleOwner:', ['except' => ['index', 'show', 'create', 'store']]);
+        $this->middleware('articleOwner', ['except' => ['index', 'show', 'create', 'store']]);
+        $this->middleware('createArticleRefused', ['except' => [ 'index', 'show']]);
     }
 
     /**
@@ -42,7 +45,9 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $tags = Tag::lists('name');
+        //dd($tags);
+        return view('articles.create')->with('tags',$tags);
     }
 
     /**
@@ -62,6 +67,12 @@ class ArticlesController extends Controller
         $article->user()->associate(Auth::user());
 
         if($article->save()){
+            foreach($data['tags'] as $tag){
+                $tag = DB::table('tags')->select('id')->where('name', $tag)->get();
+                //dd($tag);
+                $article->tags()->attach($tag[0]);
+            }
+
             return redirect('/')->with('message', 'Your article was successfully created.');
         }else{
             return redirect()->back()->with('message', 'Your article was not created. Please, try it again.');

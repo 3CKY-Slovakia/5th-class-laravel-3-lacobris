@@ -43,9 +43,13 @@
                             </li>
                             <!-- Tags -->
                             <li>
-                                <a href="#">Design</a>,
-                                <a href="#">Web</a>,
-                                <a href="#">Video</a>
+                                @foreach ($article->tags as $tag)
+                                    @if($tag === end($article->tags))
+                                        <a href="#">{{$tag->name}} </a>
+                                    @endif
+                                        <a href="#">{{$tag->name.','}} </a>
+                                @endforeach
+
                                 <i class="fa fa-user"></i>
                             </li>
                             <!-- Liked -->

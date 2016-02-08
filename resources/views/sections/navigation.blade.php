@@ -58,7 +58,7 @@
                                 </li>
                             @else
                                 <li>
-                                    <a href="{{ url('user/profile/'.Auth::user()->id) }}"><i class="fa fa-gears"></i> Profile</a>
+                                    <a href="{{ url('user/show/'.Auth::user()->id) }}"><i class="fa fa-gears"></i> Profile</a>
                                     <a href="{{ url('auth/logout') }}"><i class="fa fa-sign-out"></i> Log Out</a>
                                 </li>
                             @endif

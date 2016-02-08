@@ -3,18 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Article extends Model
+class Tag extends Model
 {
-    use SoftDeletes;
-
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'articles';
+    protected $table = 'tags';
 
     /**
      * The attributes that are mass assignable.
@@ -22,9 +19,7 @@ class Article extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
-        'video',
-        'content'
+        'name'
     ];
 
     protected $dates = ['deleted_at'];
@@ -34,15 +29,8 @@ class Article extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(){
-        return $this->belongsTo('App\User');
-    }
-
-    public function comments(){
-        return $this->hasMany('App\Comment');
-    }
-
-    public function tags(){
-        return $this->belongsToMany('App\Tag')->withTimestamps();
+    public function articles()
+    {
+        return $this->belongsToMany('App\Article');
     }
 }

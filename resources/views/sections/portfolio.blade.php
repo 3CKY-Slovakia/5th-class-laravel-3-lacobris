@@ -42,56 +42,62 @@
     <!-- Portfolio Items -->
     <div id="blog-items" class="fullwidth">
         @foreach($articles as $article)
-            <!-- Item -->
-            <div class="cbp-item item design photography">
-                <!-- Item Image -->
-                <div class="item-top">
-                    <!-- Post Link -->
-                    <a href="{{ url('article/show/'.$article->id) }}" class="ex-link item_image">
-                        <!-- Image Src -->
-                        <img src="../images/portfolio/masonry/01.jpg" alt="Crexis">
-                    </a>
-                    <!-- Icon -->
-                    <a href="#" class="item_button first">
-                        <i class="fa fa-heart"></i>
-                    </a>
-                    <!-- Icon -->
-                    <a href="#" class="item_button second">
-                        <i class="fa fa-image"></i>
-                    </a>
-                </div>
-                <!-- End Item Image -->
-
-                <!-- Details -->
-                <div class="details">
-                    <!-- Item Name -->
-                    <a href="{{ url('article/show/'.$article->id) }}" class="ex-link">
-                        <h2 class="head">
-                            {{ $article->title }}
-                        </h2>
-                    </a>
-                    <!-- Description -->
-                    <p class="note mt-13 thin italic">
-                        {{ $article->created_at->diffForHumans() }}
-                    </p>
-                    <!-- Description -->
-                    <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                    </p>
-                </div>
-                <!-- End Center Details Div -->
-
-                <!-- Posted By -->
-                <a href="#" class="posted_button">
-                    <!-- Image SRC -->
-                    <img src="../images/user_01.jpg" alt="user">
-                    <p>
-                        {{ $article->user->name }}
-                        <span>@WebDesign</span>
-                    </p>
+                <!-- Item -->
+        <div class="cbp-item item
+            <?php $tags = $article->tags->lists('name');
+                foreach ($tags as $tag)
+                    echo $tag . " ";
+        ?>">
+            <!-- Item Image -->
+            <div class="item-top">
+                <!-- Post Link -->
+                <a href="{{ url('article/show/'.$article->id) }}" class="ex-link item_image">
+                    <!-- Image Src -->
+                    <img src="../images/portfolio/masonry/01.jpg" alt="Crexis">
+                </a>
+                <!-- Icon -->
+                <a href="#" class="item_button first">
+                    <i class="fa fa-heart"></i>
+                </a>
+                <!-- Icon -->
+                <a href="#" class="item_button second">
+                    <i class="fa fa-image"></i>
                 </a>
             </div>
-            <!-- End Item -->
+            <!-- End Item Image -->
+
+            <!-- Details -->
+            <div class="details">
+                <!-- Item Name -->
+                <a href="{{ url('article/show/'.$article->id) }}" class="ex-link">
+                    <h2 class="head">
+                        {{ $article->title }}
+                    </h2>
+                </a>
+                <!-- Description -->
+                <p class="note mt-13 thin italic">
+                    {{ $article->created_at->diffForHumans() }}
+                </p>
+                <!-- Description -->
+                <p class="description">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s.
+                </p>
+            </div>
+            <!-- End Center Details Div -->
+
+            <!-- Posted By -->
+            <a href="#" class="posted_button">
+                <!-- Image SRC -->
+                <img src="../images/user_01.jpg" alt="user">
+
+                <p>
+                    {{ $article->user->name }}
+                    <span>@WebDesign</span>
+                </p>
+            </a>
+        </div>
+        <!-- End Item -->
         @endforeach
 
     </div>

@@ -7,29 +7,21 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Create article</div>
                     <div class="panel-body">
-                        @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('article/store') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Title</label>
+
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="title" value="{{ old('title') }}">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label"><i class="fa fa-vimeo-square"></i> Video ID</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-vimeo-square"></i> Video
+                                    ID</label>
+
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="video" value="{{ old('video') }}">
                                 </div>
@@ -37,12 +29,27 @@
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Description</label>
+
                                 <div class="col-md-6">
-                                    <textarea class="form-control" name="description" value="{{ old('description') }}"></textarea>
+                                    <textarea class="form-control" name="description"
+                                              value="{{ old('description') }}"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Tags</label>
+
+                                <div class="col-md-6">
+                                    @foreach($tags as $tag)
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="{{ $tag }}" name="tags[]">{{ $tag }}</label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
 
                             <textarea class="summernote" name="content"></textarea>
+
 
                             <div class="form-group">
                                 <div class="text-center">
@@ -51,6 +58,8 @@
                                     </button>
                                 </div>
                             </div>
+
+
                         </form>
                     </div>
                 </div>
